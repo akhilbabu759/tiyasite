@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/cart.dart';
 
 void main() {
   runApp(EarringsShopApp());
 }
 
 class EarringsShopApp extends StatelessWidget {
+  List<CartItem> cartItems = [
+    CartItem(
+      name: 'Item 1',
+      imageUrl: 'https://via.placeholder.com/150',
+      quantity: 1,
+      price: 10.0,
+    ),
+    CartItem(
+      name: 'Item 2',
+      imageUrl: 'https://via.placeholder.com/150',
+      quantity: 2,
+      price: 15.0,
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,6 +31,16 @@ class EarringsShopApp extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.pinkAccent,
+          actions: [
+            IconButton(
+                onPressed: () { Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => CartPage(cartItems: cartItems,),
+                          ));},
+                icon: Icon(
+                  Icons.shopping_cart,
+                  color: Colors.white,
+                ))
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -44,10 +69,17 @@ class HeroSection extends StatelessWidget {
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text('Shop Now'),
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.pinkAccent),
+          SizedBox(
+            width: MediaQuery.sizeOf(context).width,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text(
+                'Shop Now',
+                style: TextStyle(color: Colors.white),
+              ),
+              style:
+                  ElevatedButton.styleFrom(backgroundColor: Colors.pinkAccent),
+            ),
           ),
         ],
       ),
@@ -62,6 +94,7 @@ class EarringsGrid extends StatelessWidget {
     'assets/WhatsApp Image 2025-01-29 at 11.54.03 AM.jpeg',
     'assets/WhatsApp Image 2025-01-29 at 11.54.04 AM.jpeg',
   ];
+   
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +141,20 @@ class EarringsGrid extends StatelessWidget {
                   'Earrings are a popular form of jewelry worn on the earlobes. They come in various styles, including studs, hoops, and dangles, and can be made from a wide range of materials such as gold, silver, diamonds, and gemstones. Earrings have been worn for centuries across different cultures for both decorative and symbolic purposes, often reflecting personal style and cultural heritage.',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 5,
-                )
+                ),
+                SizedBox(
+                    width: MediaQuery.sizeOf(context).width,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 177, 55, 145)),
+                        onPressed: () {
+                         
+                        },
+                        child: Text(
+                          'Add To cart',
+                          style: TextStyle(color: Colors.white),
+                        )))
               ],
             ),
           );
